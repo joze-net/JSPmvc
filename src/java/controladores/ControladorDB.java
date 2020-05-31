@@ -94,7 +94,7 @@ public class ControladorDB extends HttpServlet {
              } 
              
             for(Profesor p:listaProfes){
-                escribir.println(p);
+                escribir.println(p.getNomProfesor()+"<br> ");
             }
          } catch (SQLException ex) {
              Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
