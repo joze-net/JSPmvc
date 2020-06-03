@@ -73,7 +73,7 @@ public class Profesor {
     }
     
     public String toString(){
-        return "Codigo: "+codProfesor+" Nombre: "+nomProfesor+" Apellido: "+apeProfesor+" Categoria: "+cateProfesor+" Salario: "+salarioProfesor;
+        return "Codigo: "+codProfesor+"Documento: "+docProfesor+"Nombre: "+nomProfesor+" Apellido: "+apeProfesor+" Categoria: "+cateProfesor+" Salario: "+salarioProfesor;
     }
     
 }

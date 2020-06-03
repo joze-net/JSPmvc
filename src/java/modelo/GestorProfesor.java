@@ -33,6 +33,7 @@ public class GestorProfesor {
             
             while(rs.next()){
                 listaProfesor.add(new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6)));
+                
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             
             

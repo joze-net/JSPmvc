@@ -8,16 +8,10 @@ package controladores;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,13 +58,15 @@ public class ControladorDB extends HttpServlet {
             
              processRequest(request, response);
               
-             PrintWriter escribir=response.getWriter();
+             
               response.setContentType("text/html");
              
              GestorProfesor gestorprofesor=new GestorProfesor();
              List<Profesor> listaprofesor=gestorprofesor.getListaProfesor(mipool);
              
-             escribir.print(listaprofesor);
+             request.setAttribute("profesores",listaprofesor);
+             RequestDispatcher rutaServlet=request.getRequestDispatcher("WEB-INF/vista/Index.jsp");
+             rutaServlet.forward(request, response);
             
            
        
