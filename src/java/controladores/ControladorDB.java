@@ -65,10 +65,10 @@ public class ControladorDB extends HttpServlet {
              List<Profesor> listaprofesor=gestorprofesor.getListaProfesor(mipool);
              
              request.setAttribute("profesores",listaprofesor);
-             RequestDispatcher rutaServlet=request.getRequestDispatcher("WEB-INF/vista/Index.jsp");
+             RequestDispatcher rutaServlet=request.getRequestDispatcher("vista/Index.jsp");
              rutaServlet.forward(request, response);
             
-           
+          
        
        
     }

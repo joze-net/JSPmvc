@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -37,5 +38,8 @@
             
         </c:forEach>
         </table>
-    </body>
+        
+        <input type="button" value="btnRegistrar" id="btnRegistrar" name="btnRegistrar" onclick="window.location.href='vista/RegistrarProfesor.jsp'">
+               <a href="vista/RegistrarProfesor.jsp">mmmm</a>
+    </body> 
 </html>

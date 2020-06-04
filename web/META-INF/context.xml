@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/JSP-MVC">
     
-    <Resource name="jdbc/laboratoriosql" auth="Container" type="javax.sql.DataSource" maxActive="15" maxIdle="3"
+    <Resource name="jdbc/laboratoriosql" auth="Container" type="javax.sql.DataSource" maxActive="15" maxIdle="15"
                     maxWait="5000" username="root" password="1234" driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/laboratoriosql?zeroDateTimeBehavior=convertToNull"
               className="org.apache.derby.jdbc.ClientDataSource"    
