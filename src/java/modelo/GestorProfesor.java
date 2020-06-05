@@ -2,6 +2,7 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,6 +45,21 @@ public class GestorProfesor {
         }
         
         return listaProfesor;
+    }
+    
+    public void agregarNuevoProfesor(Profesor nuevoprofesor,DataSource mipool) throws SQLException{
+        
+         Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+         String consulta="insert into profesor (doc_prof,nom_prof,ape_prof,cate_prof,sal_prof)values(?,?,?,?,?);";
+         PreparedStatement sentencia=conexion.prepareStatement(consulta);
+         
+         sentencia.setString(1,Integer.toString(nuevoprofesor.getDocProfesor()));
+         sentencia.setString(2,nuevoprofesor.getNomProfesor());
+         sentencia.setString(3,nuevoprofesor.getApeProfesor());
+         sentencia.setInt(4,nuevoprofesor.getCateProfesor());
+         sentencia.setDouble(5,nuevoprofesor.getSalarioProfesor());
+         
+         sentencia.execute();
     }
     
     

@@ -8,7 +8,10 @@ package controladores;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -56,18 +59,24 @@ public class ControladorDB extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
-             processRequest(request, response);
-              
-             
-              response.setContentType("text/html");
-             
-             GestorProfesor gestorprofesor=new GestorProfesor();
-             List<Profesor> listaprofesor=gestorprofesor.getListaProfesor(mipool);
-             
-             request.setAttribute("profesores",listaprofesor);
-             RequestDispatcher rutaServlet=request.getRequestDispatcher("vista/Index.jsp");
-             rutaServlet.forward(request, response);
             
+            String btnRegistrarProfesor=request.getParameter("instruccion");
+            
+            if(btnRegistrarProfesor!=null && btnRegistrarProfesor.equals("RegistarProfesor")){
+                //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
+                int doc_prof=Integer.parseInt(request.getParameter("documento"));
+                String nom_prof=request.getParameter("nombre");
+                String ape_prof=request.getParameter("apellido");
+                int cate_prof=Integer.parseInt(request.getParameter("categoria"));
+                double sal_prof=Double.parseDouble(request.getParameter("salario"));
+                Profesor nuevoProfesor= new Profesor(doc_prof, nom_prof, ape_prof, cate_prof, sal_prof);
+                
+                agregarProfesor(nuevoProfesor);
+                listarProfesor(request,response);
+            }else{
+                listarProfesor(request,response);
+            }
+             
           
        
        
@@ -96,5 +105,26 @@ public class ControladorDB extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void listarProfesor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         response.setContentType("text/html");
+             
+             GestorProfesor gestorprofesor=new GestorProfesor();
+             List<Profesor> listaprofesor=gestorprofesor.getListaProfesor(mipool);
+             
+             request.setAttribute("profesores",listaprofesor);
+             RequestDispatcher rutaServlet=request.getRequestDispatcher("vista/Index.jsp");
+             rutaServlet.forward(request, response);
+            
+    }
+    
+    private void agregarProfesor(Profesor nuevoProfesor){
+        GestorProfesor gestorprofesor=new GestorProfesor();
+         try {
+             gestorprofesor.agregarNuevoProfesor(nuevoProfesor, mipool);
+         } catch (SQLException ex) {
+             Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
 
 }

@@ -48,6 +48,14 @@ public class Profesor {
         this.nomProfesor = nomProfesor;
     }
 
+    public Profesor(int docProfesor, String nomProfesor, String apeProfesor, int cateProfesor, double salarioProfesor) {
+        this.docProfesor = docProfesor;
+        this.nomProfesor = nomProfesor;
+        this.apeProfesor = apeProfesor;
+        this.cateProfesor = cateProfesor;
+        this.salarioProfesor = salarioProfesor;
+    }
+
     public String getApeProfesor() {
         return apeProfesor;
     }

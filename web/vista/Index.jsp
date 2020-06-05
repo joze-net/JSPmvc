@@ -37,9 +37,16 @@
             </tr>
             
         </c:forEach>
+            
+            <tr>
+                <td>
+                    <input type="button" value="btnRegistrar"  name="btnRegistrar" onclick="window.location.href='vista/RegistrarProfesor.jsp'">
+                </td>
+            </tr>
+            
         </table>
         
-        <input type="button" value="btnRegistrar" id="btnRegistrar" name="btnRegistrar" onclick="window.location.href='vista/RegistrarProfesor.jsp'">
-               <a href="vista/RegistrarProfesor.jsp">mmmm</a>
+        
+              
     </body> 
 </html>
