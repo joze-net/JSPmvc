@@ -62,20 +62,38 @@ public class ControladorDB extends HttpServlet {
             
             String btnRegistrarProfesor=request.getParameter("instruccion");
             
-            if(btnRegistrarProfesor!=null && btnRegistrarProfesor.equals("RegistarProfesor")){
-                //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
-                int doc_prof=Integer.parseInt(request.getParameter("documento"));
-                String nom_prof=request.getParameter("nombre");
-                String ape_prof=request.getParameter("apellido");
-                int cate_prof=Integer.parseInt(request.getParameter("categoria"));
-                double sal_prof=Double.parseDouble(request.getParameter("salario"));
-                Profesor nuevoProfesor= new Profesor(doc_prof, nom_prof, ape_prof, cate_prof, sal_prof);
+            if(btnRegistrarProfesor!=null){
+            
+            switch (btnRegistrarProfesor){
                 
-                agregarProfesor(nuevoProfesor);
-                listarProfesor(request,response);
+                case "RegistrarProfesor" : 
+                    
+                    //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
+                        int doc_prof=Integer.parseInt(request.getParameter("documento"));
+                        String nom_prof=request.getParameter("nombre");
+                        String ape_prof=request.getParameter("apellido");
+                        int cate_prof=Integer.parseInt(request.getParameter("categoria"));
+                        double sal_prof=Double.parseDouble(request.getParameter("salario"));
+                        Profesor nuevoProfesor= new Profesor(doc_prof, nom_prof, ape_prof, cate_prof, sal_prof);
+
+                        agregarProfesor(nuevoProfesor);
+                        listarProfesor(request,response);
+                        break;
+                case "CargarDatos":
+                       int codigoProfesor=Integer.parseInt(request.getParameter("codigoProfesor"));
+                       cargarDatos(request,response,codigoProfesor); //este metodo se encargara de consultar el profesor segun el codigo
+                    
+                default: 
+                     //   listarProfesor(request,response);
+                
+                
+                
+            }
             }else{
                 listarProfesor(request,response);
             }
+            
+            
              
           
        
@@ -125,6 +143,15 @@ public class ControladorDB extends HttpServlet {
          } catch (SQLException ex) {
              Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
          }
+    }
+
+    private void cargarDatos(HttpServletRequest request, HttpServletResponse response,int cod) throws ServletException, IOException {
+        GestorProfesor gestorprofesor=new GestorProfesor();
+        Profesor profesorActualizar=gestorprofesor.consultarProfesorPorCodigo(cod, mipool);
+        
+        request.setAttribute("profesor",profesorActualizar);
+        RequestDispatcher rutaServlet1=request.getRequestDispatcher("vista/Actualizar.jsp");
+        rutaServlet1.forward(request, response);
     }
 
 }

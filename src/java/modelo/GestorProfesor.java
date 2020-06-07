@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 
 
@@ -37,7 +38,7 @@ public class GestorProfesor {
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             
-            
+            conexion.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(GestorProfesor.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,6 +61,38 @@ public class GestorProfesor {
          sentencia.setDouble(5,nuevoprofesor.getSalarioProfesor());
          
          sentencia.execute();
+         conexion.close();
+    }
+    
+    public Profesor consultarProfesorPorCodigo(int CodigoProfesor,DataSource mipool){
+         Profesor profesorActualizar=null;
+         try {
+            
+            Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+            String consulta="Select * from profesor where codProfesor="+CodigoProfesor;
+            Statement sentencia=conexion.createStatement();
+            
+            ResultSet rs=sentencia.executeQuery(consulta);
+            
+            while(rs.next()){
+              profesorActualizar=new Profesor(rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6));
+                
+            }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
+            
+            conexion.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorProfesor.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       
+        
+     
+        
+        return profesorActualizar;
+        
+        
+        
     }
     
     

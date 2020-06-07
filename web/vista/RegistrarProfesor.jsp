@@ -12,13 +12,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html">
-  <title>Horizontal Application Form - Template Monster Demo</title>
+  <title>Formulario de registro</title>
   <meta name="author" content="Jake Rocheleau">
   <link rel="shortcut icon" href="http://static.tmimgcdn.com/img/favicon.ico">
   <link rel="icon" href="http://static.tmimgcdn.com/img/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="../css/styles.css">
   <link rel="stylesheet" type="text/css" media="all" href="../css/switchery.min.css">
-  <script type="text/javascript" src="js/switchery.min.js"></script>
+  <script type="text/javascript" src="../js/switchery.min.js"></script>
 </head>
 
 <body>
@@ -43,13 +43,13 @@
   <div class="col-3">
     <label>
       Documento profesor
-      <input placeholder="numero de documento" id="documento" name="documento" tabindex="3">
+      <input placeholder="numero de documento" id="documento" name="documento" tabindex="3" type="number" maxlength="10">
     </label>
   </div>
   <div class="col-3">
     <label>
       Categoria
-      <input placeholder="Categoria profesor" id="categoria" name="categoria" tabindex="4">
+      <input placeholder="Categoria profesor" id="categoria" name="categoria" tabindex="4" type="number" max="3" maxlength="1">
     </label>
   </div>
   
@@ -57,11 +57,11 @@
   <div class="col-3">
     <label>
       Salario
-      <input placeholder="Salario de profesor" id="salario" name="salario" tabindex="6">
+      <input placeholder="Salario de profesor" id="salario" name="salario" tabindex="6" type="number" min="0">
     </label>
   </div>
   
-      <input type="hidden" value="RegistarProfesor" name="instruccion">
+      <input type="hidden" value="RegistrarProfesor" name="instruccion">
   <div class="col-submit">
       <input type="submit"  value="Registrar Profesor">
    

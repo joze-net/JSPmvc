@@ -24,8 +24,16 @@
                 <td>Apellido</td>
                 <td>Categoria</td>
                 <td>Salario</td>
+                <td>Accion</td>
             </tr>
         <c:forEach var="p" items="${profesores}">
+            
+            <c:url var="linkTemporal" value="ControladorDB"><!-- de esta manera usamos tags para enviar datos por medio de una url tmporal-->
+                
+                <c:param name="instruccion" value="CargarDatos"></c:param>
+                <c:param name="codigoProfesor" value="${p.getCodProfesor()}"></c:param>
+                
+            </c:url>
             
             <tr>
                 <td>${p.getCodProfesor()}</td>
@@ -34,6 +42,9 @@
                 <td>${p.apeProfesor}</td>
                 <td>${p.cateProfesor}</td>
                 <td>${p.salarioProfesor}</td>
+                <td><a href="${linkTemporal}">Actualizar</a></td>                                             
+             <!--   <td><a href="vista/Actualizar.jsp?cod=${p.getCodProfesor()}">Actualizar</a></td>   asi se puede tambien enviar el codigo a la pagina-->
+                
             </tr>
             
         </c:forEach>
