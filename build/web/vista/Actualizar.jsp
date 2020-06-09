@@ -26,31 +26,31 @@
   
   <h1>Formulario de Actualizaciòn </h1>
   
-  <form   action="../ControladorDB" method="get">
+  <form   action="ControladorDB" method="get">
   
       <div class="col-2">
     <label>
       Nombre
-      <input placeholder="${profesor.getNomProfesor()}" id="nombre" name="nombre" tabindex="1">
+      <input value="${profesor.getNomProfesor()}" id="nombre" name="nombre" tabindex="1">
     </label>
   </div>
   <div class="col-2">
     <label>
       Apellido
-      <input placeholder="${profesor.getApeProfesor()}" id="apellido" name="apellido" tabindex="2">
+      <input value="${profesor.getApeProfesor()}" id="apellido" name="apellido" tabindex="2">
     </label>
   </div>
   
   <div class="col-3">
     <label>
       Documento profesor
-      <input placeholder="${profesor.getDocProfesor()}" id="documento" name="documento" tabindex="3"  type="number" maxlength="10">
+      <input value="${profesor.getDocProfesor()}" id="documento" name="documento" tabindex="3"  type="number" maxlength="10">
     </label>
   </div>
   <div class="col-3">
     <label>
       Categoria
-      <input placeholder="${profesor.getCateProfesor()}" id="categoria" name="categoria" tabindex="4" type="number" max="3" maxlength="1">
+      <input value="${profesor.getCateProfesor()}" id="categoria" name="categoria" tabindex="4" type="number" max="3" maxlength="1">
     </label>
   </div>
   
@@ -58,11 +58,13 @@
   <div class="col-3">
     <label>
       Salario
-      <input placeholder="${profesor.getSalarioProfesor()}" id="salario" name="salario" tabindex="6" type="number" min="0">
+      <input value="${profesor.getSalarioProfesor()}" id="salario" name="salario" tabindex="6" type="number" min="0">
     </label>
   </div>
   
       <input type="hidden" value="ActualizarProfesor" name="instruccion">
+      <input type="hidden" value="${profesor.getCodProfesor()}" name="CodigoProfesor">
+      
   <div class="col-submit">
       <input type="submit"  value="Actualizar Profesor">
    

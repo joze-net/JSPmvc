@@ -80,9 +80,21 @@ public class ControladorDB extends HttpServlet {
                         listarProfesor(request,response);
                         break;
                 case "CargarDatos":
-                       int codigoProfesor=Integer.parseInt(request.getParameter("codigoProfesor"));
-                       cargarDatos(request,response,codigoProfesor); //este metodo se encargara de consultar el profesor segun el codigo
-                    
+                        int codigoProfesor=Integer.parseInt(request.getParameter("codigoProfesor"));
+                        cargarDatos(request,response,codigoProfesor); //este metodo se encargara de consultar el profesor segun el codigo
+                
+                case "ActualizarProfesor":
+                        //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
+                        int codigoProfe=Integer.parseInt(request.getParameter("CodigoProfesor"));
+                        int doc_actualizar=Integer.parseInt(request.getParameter("documento"));
+                        String nom_actualizar=request.getParameter("nombre");
+                        String ape_actualizar=request.getParameter("apellido");
+                        int cate_actualizar=Integer.parseInt(request.getParameter("categoria"));
+                        double sal_actualizar=Double.parseDouble(request.getParameter("salario"));
+                        Profesor profesorActualizar= new Profesor(codigoProfe,doc_actualizar, nom_actualizar, ape_actualizar, cate_actualizar, sal_actualizar);
+                        actualizarProfesor(profesorActualizar);
+                        listarProfesor(request,response);
+                        break;
                 default: 
                      //   listarProfesor(request,response);
                 
@@ -147,11 +159,23 @@ public class ControladorDB extends HttpServlet {
 
     private void cargarDatos(HttpServletRequest request, HttpServletResponse response,int cod) throws ServletException, IOException {
         GestorProfesor gestorprofesor=new GestorProfesor();
-        Profesor profesorActualizar=gestorprofesor.consultarProfesorPorCodigo(cod, mipool);
+        Profesor profesorCargarDatos=gestorprofesor.consultarProfesorPorCodigo(cod, mipool);
         
-        request.setAttribute("profesor",profesorActualizar);
+        request.setAttribute("profesor",profesorCargarDatos);
         RequestDispatcher rutaServlet1=request.getRequestDispatcher("vista/Actualizar.jsp");
         rutaServlet1.forward(request, response);
+    }
+
+    private void actualizarProfesor(Profesor profesorActualizar) {
+        GestorProfesor gestorprofesor=new GestorProfesor();
+         try {
+             gestorprofesor.actualizarProfesor(profesorActualizar,mipool);
+         } catch (SQLException ex) {
+             Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        
+        
     }
 
 }
