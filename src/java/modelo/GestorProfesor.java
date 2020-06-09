@@ -34,7 +34,7 @@ public class GestorProfesor {
             ResultSet rs=sentencia.executeQuery(consulta);
             
             while(rs.next()){
-                listaProfesor.add(new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6)));
+                listaProfesor.add(new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6)));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             
@@ -75,7 +75,7 @@ public class GestorProfesor {
             ResultSet rs=sentencia.executeQuery(consulta);
             
             while(rs.next()){
-              profesorActualizar=new Profesor(rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6));
+              profesorActualizar=new Profesor(rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             

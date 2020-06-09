@@ -50,7 +50,7 @@
   <div class="col-3">
     <label>
       Categoria
-      <input placeholder="${profesor.getCateProfesor()}" id="categoria" name="categoria" tabindex="4" type="number" max="3" maxlength="1">>
+      <input placeholder="${profesor.getCateProfesor()}" id="categoria" name="categoria" tabindex="4" type="number" max="3" maxlength="1">
     </label>
   </div>
   
