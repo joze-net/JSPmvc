@@ -69,7 +69,7 @@ public class ControladorDB extends HttpServlet {
                 case "RegistrarProfesor" : 
                     
                     //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
-                        int doc_prof=Integer.parseInt(request.getParameter("documento"));
+                        String doc_prof=request.getParameter("documento");
                         String nom_prof=request.getParameter("nombre");
                         String ape_prof=request.getParameter("apellido");
                         int cate_prof=Integer.parseInt(request.getParameter("categoria"));
@@ -86,7 +86,7 @@ public class ControladorDB extends HttpServlet {
                 case "ActualizarProfesor":
                         //rellenamo slas variables que crearan al nuevo profesor apartir de lo ue ingresa el usuario
                         int codigoProfe=Integer.parseInt(request.getParameter("CodigoProfesor"));
-                        int doc_actualizar=Integer.parseInt(request.getParameter("documento"));
+                        String doc_actualizar=request.getParameter("documento");
                         String nom_actualizar=request.getParameter("nombre");
                         String ape_actualizar=request.getParameter("apellido");
                         int cate_actualizar=Integer.parseInt(request.getParameter("categoria"));

@@ -9,7 +9,7 @@ package modelo;
 public class Profesor {
     
     private int codProfesor;
-    private int docProfesor;
+    private String docProfesor;
     private String nomProfesor;
     private String apeProfesor;
     private int cateProfesor;
@@ -23,7 +23,7 @@ public class Profesor {
         this.codProfesor = codProfesor;
     }
 
-    public Profesor(int codProfesor, int docProfesor, String nomProfesor, String apeProfesor, int cateProfesor, double salarioProfesor) {
+    public Profesor(int codProfesor, String docProfesor, String nomProfesor, String apeProfesor, int cateProfesor, double salarioProfesor) {
         this.codProfesor = codProfesor;
         this.docProfesor = docProfesor;
         this.nomProfesor = nomProfesor;
@@ -32,11 +32,11 @@ public class Profesor {
         this.salarioProfesor = salarioProfesor;
     }
 
-    public int getDocProfesor() {
+    public String getDocProfesor() {
         return docProfesor;
     }
 
-    public void setDocProfesor(int docProfesor) {
+    public void setDocProfesor(String docProfesor) {
         this.docProfesor = docProfesor;
     }
 
@@ -48,7 +48,7 @@ public class Profesor {
         this.nomProfesor = nomProfesor;
     }
 
-    public Profesor(int docProfesor, String nomProfesor, String apeProfesor, int cateProfesor, double salarioProfesor) {
+    public Profesor(String docProfesor, String nomProfesor, String apeProfesor, int cateProfesor, double salarioProfesor) {
         this.docProfesor = docProfesor;
         this.nomProfesor = nomProfesor;
         this.apeProfesor = apeProfesor;

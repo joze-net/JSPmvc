@@ -43,7 +43,7 @@
   <div class="col-3">
     <label>
       Documento profesor
-      <input placeholder="numero de documento" id="documento" name="documento" tabindex="3" type="number" maxlength="10">
+      <input placeholder="numero de documento" id="documento" name="documento" tabindex="3" type="number" max="99999999999">
     </label>
   </div>
   <div class="col-3">

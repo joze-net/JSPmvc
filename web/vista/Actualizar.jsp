@@ -44,7 +44,7 @@
   <div class="col-3">
     <label>
       Documento profesor
-      <input value="${profesor.getDocProfesor()}" id="documento" name="documento" tabindex="3"  type="number" maxlength="10">
+      <input value="${profesor.getDocProfesor()}" id="documento" name="documento" tabindex="3"  type="number" max="99999999999">
     </label>
   </div>
   <div class="col-3">

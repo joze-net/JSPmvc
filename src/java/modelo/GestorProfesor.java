@@ -42,7 +42,7 @@ public class GestorProfesor {
             ResultSet rs=sentencia.executeQuery(consulta);
             
             while(rs.next()){
-                listaProfesor.add(new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6)));
+                listaProfesor.add(new Profesor(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6)));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             sentencia.close();
@@ -62,7 +62,7 @@ public class GestorProfesor {
          String consulta="insert into profesor (doc_prof,nom_prof,ape_prof,cate_prof,sal_prof)values(?,?,?,?,?);";
          PreparedStatement sentencia=conexion.prepareStatement(consulta);
          
-         sentencia.setString(1,Integer.toString(nuevoprofesor.getDocProfesor()));
+         sentencia.setString(1,nuevoprofesor.getDocProfesor());
          sentencia.setString(2,nuevoprofesor.getNomProfesor());
          sentencia.setString(3,nuevoprofesor.getApeProfesor());
          sentencia.setInt(4,nuevoprofesor.getCateProfesor());
@@ -84,7 +84,7 @@ public class GestorProfesor {
             ResultSet rs=sentencia.executeQuery(consulta);
             
             while(rs.next()){
-              profesorConsultar=new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6));
+              profesorConsultar=new Profesor(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
             sentencia.close();
@@ -110,7 +110,7 @@ public class GestorProfesor {
          String consulta="update profesor set doc_prof=?, nom_prof=?, ape_prof=?,cate_prof=?,sal_prof=? where codProfesor=?";
          PreparedStatement sentencia=conexion.prepareStatement(consulta);
          
-         sentencia.setString(1,Integer.toString(profesorActualizar.getDocProfesor()));
+         sentencia.setString(1,profesorActualizar.getDocProfesor());
          sentencia.setString(2,profesorActualizar.getNomProfesor());
          sentencia.setString(3,profesorActualizar.getApeProfesor());
          sentencia.setInt(4,profesorActualizar.getCateProfesor());

@@ -7,10 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" media="all"  href="css/estilotabla.css" >
         <title>JSP Page</title>
     </head>
     <body>
@@ -18,13 +21,13 @@
         
         <table style="margin: auto;">
             <tr>
-                <td>Codigo</td>
-                <td>Documento</td>
-                <td>Nombre</td>
-                <td>Apellido</td>
-                <td>Categoria</td>
-                <td>Salario</td>
-                <td>Accion</td>
+                <th>Codigo</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Categoria</th>
+                <th>Salario</th>
+                <th>Accion</th>
             </tr>
         <c:forEach var="p" items="${profesores}">
             
@@ -58,7 +61,7 @@
             
             <tr>
                 <td>
-                    <input type="button" value="btnRegistrar"  name="btnRegistrar" onclick="window.location.href='vista/RegistrarProfesor.jsp'">
+                    <input type="button" value="Registrar"  name="btnRegistrar" onclick="window.location.href='vista/RegistrarProfesor.jsp'">
                 </td>
                 
             </tr>
