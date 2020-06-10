@@ -30,6 +30,7 @@ import modelo.Profesor;
 public class ControladorDB extends HttpServlet {
      @Resource(name="jdbc/laboratoriosql")
    DataSource mipool;
+     private GestorProfesor gestorprofesor;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -144,8 +145,8 @@ public class ControladorDB extends HttpServlet {
     private void listarProfesor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          response.setContentType("text/html");
              
-             GestorProfesor gestorprofesor=new GestorProfesor();
-             List<Profesor> listaprofesor=gestorprofesor.getListaProfesor(mipool);
+             
+             List<Profesor> listaprofesor=this.gestorprofesor.getListaProfesor();
              
              request.setAttribute("profesores",listaprofesor);
              RequestDispatcher rutaServlet=request.getRequestDispatcher("vista/Index.jsp");
@@ -154,17 +155,17 @@ public class ControladorDB extends HttpServlet {
     }
     
     private void agregarProfesor(Profesor nuevoProfesor){
-        GestorProfesor gestorprofesor=new GestorProfesor();
+        
          try {
-             gestorprofesor.agregarNuevoProfesor(nuevoProfesor, mipool);
+             this.gestorprofesor.agregarNuevoProfesor(nuevoProfesor);
          } catch (SQLException ex) {
              Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
 
     private void cargarDatos(HttpServletRequest request, HttpServletResponse response,int cod) throws ServletException, IOException {
-        GestorProfesor gestorprofesor=new GestorProfesor();
-        Profesor profesorCargarDatos=gestorprofesor.consultarProfesorPorCodigo(cod, mipool);
+        
+        Profesor profesorCargarDatos=this.gestorprofesor.consultarProfesorPorCodigo(cod);
         
         request.setAttribute("profesor",profesorCargarDatos);
         RequestDispatcher rutaServlet1=request.getRequestDispatcher("vista/Actualizar.jsp");
@@ -172,9 +173,9 @@ public class ControladorDB extends HttpServlet {
     }
 
     private void actualizarProfesor(Profesor profesorActualizar) {
-        GestorProfesor gestorprofesor=new GestorProfesor();
+        
          try {
-             gestorprofesor.actualizarProfesor(profesorActualizar,mipool);
+             this.gestorprofesor.actualizarProfesor(profesorActualizar);
          } catch (SQLException ex) {
              Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -184,12 +185,18 @@ public class ControladorDB extends HttpServlet {
     }
 
     private void eliminarProfesor(HttpServletRequest request, HttpServletResponse response, int codigoProfesorEliminar) {
-        GestorProfesor gestorprofesor=new GestorProfesor();
+       
          try {
-             gestorprofesor.eliminarProfesor(codigoProfesorEliminar,mipool);
+             this.gestorprofesor.eliminarProfesor(codigoProfesorEliminar);
          } catch (SQLException ex) {
              Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
          }
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init(); 
+         this.gestorprofesor=new GestorProfesor(mipool);
     }
 
 }

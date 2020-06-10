@@ -20,14 +20,22 @@ public class GestorProfesor {
    
     
     private List<Profesor> listaProfesor;
-
-    public List<Profesor> getListaProfesor(DataSource mipool) {
+    private Connection conexion;
+    private PreparedStatement sentencia;
+    private DataSource mipool;
+    
+    
+    public GestorProfesor(DataSource mipool){
+        this.mipool=mipool;
+    }
+    
+    public List<Profesor> getListaProfesor() {
         
         this.listaProfesor=new ArrayList();
         
         try {
             
-            Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+            Connection conexion=this.mipool.getConnection();//este es el metodo que nos devuelve la conexion
             Statement sentencia=conexion.createStatement();
             String consulta="Select * from profesor";
             
@@ -37,7 +45,7 @@ public class GestorProfesor {
                 listaProfesor.add(new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6)));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
-            
+            sentencia.close();
             conexion.close();
             
         } catch (SQLException ex) {
@@ -48,9 +56,9 @@ public class GestorProfesor {
         return listaProfesor;
     }
     
-    public void agregarNuevoProfesor(Profesor nuevoprofesor,DataSource mipool) throws SQLException{
+    public void agregarNuevoProfesor(Profesor nuevoprofesor) throws SQLException{
         
-         Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+         Connection conexion=this.mipool.getConnection();//este es el metodo que nos devuelve la conexion
          String consulta="insert into profesor (doc_prof,nom_prof,ape_prof,cate_prof,sal_prof)values(?,?,?,?,?);";
          PreparedStatement sentencia=conexion.prepareStatement(consulta);
          
@@ -61,14 +69,15 @@ public class GestorProfesor {
          sentencia.setDouble(5,nuevoprofesor.getSalarioProfesor());
          
          sentencia.execute();
+         sentencia.close();
          conexion.close();
     }
     
-    public Profesor consultarProfesorPorCodigo(int CodigoProfesor,DataSource mipool){
+    public Profesor consultarProfesorPorCodigo(int CodigoProfesor){
          Profesor profesorConsultar=null;
          try {
             
-            Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+            Connection conexion=this.mipool.getConnection();//este es el metodo que nos devuelve la conexion
             String consulta="Select * from profesor where codProfesor="+CodigoProfesor;
             Statement sentencia=conexion.createStatement();
             
@@ -78,7 +87,7 @@ public class GestorProfesor {
               profesorConsultar=new Profesor(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6));
                 
             }//en este while lo que hacemos es rellenar el arraylist con los resulyados obtenidos d la base de datos
-            
+            sentencia.close();
             conexion.close();
             
         } catch (SQLException ex) {
@@ -95,9 +104,9 @@ public class GestorProfesor {
         
     }
 
-    public void actualizarProfesor(Profesor profesorActualizar,DataSource mipool) throws SQLException {
+    public void actualizarProfesor(Profesor profesorActualizar) throws SQLException {
         
-         Connection conexion=mipool.getConnection();//este es el metodo que nos devuelve la conexion
+         Connection conexion=this.mipool.getConnection();//este es el metodo que nos devuelve la conexion
          String consulta="update profesor set doc_prof=?, nom_prof=?, ape_prof=?,cate_prof=?,sal_prof=? where codProfesor=?";
          PreparedStatement sentencia=conexion.prepareStatement(consulta);
          
@@ -109,17 +118,23 @@ public class GestorProfesor {
          sentencia.setInt(6,profesorActualizar.getCodProfesor());
          sentencia.execute();
          conexion.close();
+         sentencia.close();
         
     }
 
-    public void eliminarProfesor(int codigoProfesorEliminar, DataSource mipool) throws SQLException {
+    public void eliminarProfesor(int codigoProfesorEliminar) throws SQLException {
         
-        Connection conexion=mipool.getConnection();
+        try{
+        this.conexion=this.mipool.getConnection();
         String consulta = "delete from profesor where codProfesor=?";
-        PreparedStatement sentencia=conexion.prepareStatement(consulta);
-        sentencia.setInt(1, codigoProfesorEliminar);
-        sentencia.execute();
-        conexion.close();
+        this.sentencia=this.conexion.prepareStatement(consulta);
+        this.sentencia.setInt(1, codigoProfesorEliminar);
+        this.sentencia.execute();
+        
+        }finally{
+            this.conexion.close();
+            this.sentencia.close();
+        }
     }
     
     
