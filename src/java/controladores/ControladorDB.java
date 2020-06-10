@@ -7,7 +7,6 @@ package controladores;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -95,6 +94,12 @@ public class ControladorDB extends HttpServlet {
                         actualizarProfesor(profesorActualizar);
                         listarProfesor(request,response);
                         break;
+                        
+                case "Eliminar":
+                        int codigoProfesorEliminar=Integer.parseInt(request.getParameter("codigoProfesor"));
+                        eliminarProfesor(request,response,codigoProfesorEliminar);
+                        listarProfesor(request,response);
+                        break;
                 default: 
                      //   listarProfesor(request,response);
                 
@@ -176,6 +181,15 @@ public class ControladorDB extends HttpServlet {
         
         
         
+    }
+
+    private void eliminarProfesor(HttpServletRequest request, HttpServletResponse response, int codigoProfesorEliminar) {
+        GestorProfesor gestorprofesor=new GestorProfesor();
+         try {
+             gestorprofesor.eliminarProfesor(codigoProfesorEliminar,mipool);
+         } catch (SQLException ex) {
+             Logger.getLogger(ControladorDB.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
 }

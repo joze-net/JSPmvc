@@ -111,6 +111,16 @@ public class GestorProfesor {
          conexion.close();
         
     }
+
+    public void eliminarProfesor(int codigoProfesorEliminar, DataSource mipool) throws SQLException {
+        
+        Connection conexion=mipool.getConnection();
+        String consulta = "delete from profesor where codProfesor=?";
+        PreparedStatement sentencia=conexion.prepareStatement(consulta);
+        sentencia.setInt(1, codigoProfesorEliminar);
+        sentencia.execute();
+        conexion.close();
+    }
     
     
     
